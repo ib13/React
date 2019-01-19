@@ -1,0 +1,21 @@
+064
+We use scss instead of normal css
+We need to convert scss into normal css just like es6 js
+
+065
+we use partial css file name to indicate they are partial and donot get loaded by default but we have to import them
+while import we donot write their extension or _
+We can create variables in this
+
+066
+We ensured that all browser start with same place
+
+067
+We can create _settings.scss and here we can set some values which we can import in other scss files and use that settings
+
+068
+It has various function available 
+
+075
+See the video
+With react router we can use client side routing
