@@ -19,3 +19,63 @@ It has various function available
 075
 See the video
 With react router we can use client side routing
+
+077
+We use BrowserRouter and inside this we write our routes
+We mention a path and component to be rendered on that page
+But by this we get error on other page as we are running server side routing
+We need to set the webpack
+by doing this we send it to index.html everytime a new webpage is loaded
+But by doing this the link /abc also shows component of /
+so we need to use exact attribute
+
+So what happens in routes is that we mention the path and and it gets loaded in index.html
+
+078
+Setting up 404
+We create a new page and if no other match then this is showed
+we use switch to go find match one by one and when a match is found it stops
+so we use Switch tag and and place error page at last
+ 
+079
+To use client side routing we use <Link> instead of <a>
+So by doing this page does not refresh
+We can use NavLink which gives a little more fuctionality
+activeClassName attribute can be used when that page is active then only class name present
+
+080
+What we do is that we create a seperate file for our different files
+
+081
+we can pass query strings in url and they are shwon in props.search
+we can setup dynamic url by /:varname after url and to access the varname props.match.params.id
+
+083
+Redux is state management library
+similar to component based state
+
+084
+See video for difference
+See 12:00
+With redux each component can define two things-What data it needs and what data it can change.
+
+085
+We created the store and this can have the state i.e. the variables we want to change
+state={object:val}
+store we created has different methods
+store.getState() returns the object of state
+store tracks our changing data
+
+086
+Actions allow us to change the redux store values
+Actions is an object that gets sent to the store
+convention to mention action is that they are written in capitals
+we pass an argument action along with state in createStore and action.type is equal to the the action given in 
+store.dispatch then we execute what is written in it.
+
+087
+store.subscribe takes function which is called when the state changes
+so instead of writing console.log() after every dispactch we write console.log() in store.subscribe
+
+088
+We can destructure an object using 
