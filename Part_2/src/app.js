@@ -180,7 +180,12 @@ const expensesReducerDefaultState = [];
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
     case "ADD_EXPENSE":
-      return state.concat(action.expense);
+      // return state.concat(action.expense);
+      return [...state, action.expense]; //same as concat
+    case "REMOVE_EXPENSE":
+      return state.filter(({ id }) => {
+        return id !== action.id; //return true or false weather id there or not
+      });
     default:
       return state;
   }
@@ -207,13 +212,18 @@ const store3 = createStore(
 
 console.log("091", store3.getState());
 
-//
+// This is just a demostate i.e. our template pattern of the state i.e. how our state would look like
 const demoState = {
   expenses: [
     {
       id: "abcd",
       desc: "xyz",
       amount: 100
+    },
+    {
+      id: "xyzq",
+      desc: "fdg",
+      amount: 234
     }
   ],
   filters: {
@@ -234,11 +244,37 @@ const addExpense = ({ desc = "", amount = 0 }) => ({
   }
 });
 
+// Remove expense action generator
+const removeExpense = ({ id } = {}) => ({
+  type: "REMOVE_EXPENSE",
+  id
+});
+
 store3.subscribe(() => {
   console.log(store3.getState());
 });
 
 store3.dispatch(addExpense({ desc: "Rent", amount: 100 }));
+const exp = store3.dispatch(addExpense({ desc: "Coffee", amount: 200 }));
+// By doing this expense gets added in the array
+
+console.log(exp);
+store3.dispatch(removeExpense({ id: exp.expense.id }));
+// We get addExpense object back
+
+// 094
+const spreadobj = {
+  name: "Ishan",
+  age: 20
+};
+
+// This is spreading objects
+const spreadedobj = {
+  ...spreadobj,
+  location: "Patiala",
+  age: 19 //Overrides
+};
+console.log(spreadedobj);
 
 //========================================================//
 ReactDOM.render(template_1, document.getElementById("app"));

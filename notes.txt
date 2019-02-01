@@ -95,3 +95,11 @@ Reducer tells what will happen when an action is called
  093
  In case of multiple reducers when a dispatch is called all the reducers are seen and only the one in which
  case exist is called
+Spread operators:
+if arr is an array and we write [...arr] this will print all the elements in an array
+[...arr,'A'] this will concatinate 'A' in the array at that position
+['A',...arr,'B']
+
+094
+We can use spread operators for objects as well
+see the code
