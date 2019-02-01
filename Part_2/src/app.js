@@ -70,7 +70,7 @@ import AppRouter from "./routers/AppRouter";
 const template_1 = <AppRouter />;
 
 // 085
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 // const store1 = createStore((state = { count: 0 }) => {
 //   return state;
 // });
@@ -126,8 +126,9 @@ store2.dispatch({
   type: "DECREMENT"
 });
 
-unsubscribe();
+// unsubscribe();
 // To stop subscribing ie no function call after this line
+// Uncomment when to use
 
 store2.dispatch({
   type: "INCREMENT",
@@ -158,6 +159,86 @@ const [flatno, apt, street] = arr1;
 
 const [fl1, ,] = arr1;
 // Skip others
+
+// 090
+const inccount = (payload = {}) => ({
+  type: "INCREMENT",
+  incrementby: typeof payload.incrementby === "number" ? payload.incrementby : 1
+});
+
+// We can destructure the payload in incount
+const inccount1 = ({ incrementby = 1 } = {}) => ({
+  type: "INCREMENT",
+  incrementby: incrementby
+});
+
+store2.dispatch(inccount({ incrementby: 5 }));
+// We can do this
+
+// 092
+const expensesReducerDefaultState = [];
+const expensesReducer = (state = expensesReducerDefaultState, action) => {
+  switch (action.type) {
+    case "ADD_EXPENSE":
+      return state.concat(action.expense);
+    default:
+      return state;
+  }
+};
+
+const filterReducerDefaultState = {
+  text: "",
+  sortBy: "desc"
+};
+const filterReducer = (state = filterReducerDefaultState, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+// const store3 = createStore(expensesReducer);
+const store3 = createStore(
+  combineReducers({
+    expenses: expensesReducer, //This means that expenses is managed by expensesReducer
+    filters: filterReducer
+  })
+);
+
+console.log("091", store3.getState());
+
+//
+const demoState = {
+  expenses: [
+    {
+      id: "abcd",
+      desc: "xyz",
+      amount: 100
+    }
+  ],
+  filters: {
+    text: "rent",
+    sortBy: "amount"
+  }
+};
+
+// 093
+import uuid from "uuid";
+// Add expense action generator
+const addExpense = ({ desc = "", amount = 0 }) => ({
+  type: "ADD_EXPENSE",
+  expense: {
+    id: uuid(), //Autogenerate
+    desc,
+    amount
+  }
+});
+
+store3.subscribe(() => {
+  console.log(store3.getState());
+});
+
+store3.dispatch(addExpense({ desc: "Rent", amount: 100 }));
 
 //========================================================//
 ReactDOM.render(template_1, document.getElementById("app"));

@@ -79,3 +79,19 @@ so instead of writing console.log() after every dispactch we write console.log()
 
 088
 We can destructure an object using 
+
+091
+Reducer:
+Reducer tells what will happen when an action is called
+->Reducer are pure function i.e the return depend on variables inside the function and not at global variables
+->Never change state or action. We just pass them in arguments
+ 
+ 092
+ When we have large apps we need to break aour app into multiple reducers
+ Combine Reducer allows us to combine multiple reducers to form a single store
+ This allows our app to break into multiple reducers for simplicity
+ Previously we passed reducer function into store but now we created multiple reducers and combined them
+
+ 093
+ In case of multiple reducers when a dispatch is called all the reducers are seen and only the one in which
+ case exist is called
